@@ -5,7 +5,7 @@ import os
 import random
 import re
 import sys
-
+sys.setrecursionlimit(10**8)
 class SinglyLinkedListNode:
     def __init__(self, node_data):
         self.data = node_data
@@ -36,12 +36,7 @@ def print_singly_linked_list(node, sep, fptr):
         if node:
             fptr.write(sep)
 
-#
-# Complete the 'reverse' function below.
-#
-# The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
-# The function accepts INTEGER_SINGLY_LINKED_LIST llist as parameter.
-#
+# Complete the mergeLists function below.
 
 #
 # For your reference:
@@ -51,23 +46,20 @@ def print_singly_linked_list(node, sep, fptr):
 #     SinglyLinkedListNode next
 #
 #
-
-def reverse(llist):
-    # Write your code here
-    if not llist:
-        return llist
-    prev = None
-    curr = llist
-    nxt = llist.next
-    while curr:
-        nxt = curr.next
-        # change the direction of the nodes
-        curr.next = prev
-        # shiftting the nodes
-        prev = curr
-        curr = nxt
-    llist = prev
-    return llist
+def mergeLists(head1, head2):
+    head = new_list = ListNode(0)
+        
+    while (list1 and list2):
+        if (list1.val < list2.val ):
+            new_list.next = list1
+            list1 = list1.next
+        else:
+            new_list.next = list2
+            list2 = list2.next
+        new_list = new_list.next
+    
+    new_list.next = list1 or list2
+    return head.next
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -75,17 +67,25 @@ if __name__ == '__main__':
     tests = int(input())
 
     for tests_itr in range(tests):
-        llist_count = int(input())
+        llist1_count = int(input())
 
-        llist = SinglyLinkedList()
+        llist1 = SinglyLinkedList()
 
-        for _ in range(llist_count):
-            llist_item = int(input())
-            llist.insert_node(llist_item)
+        for _ in range(llist1_count):
+            llist1_item = int(input())
+            llist1.insert_node(llist1_item)
+            
+        llist2_count = int(input())
 
-        llist1 = reverse(llist.head)
+        llist2 = SinglyLinkedList()
 
-        print_singly_linked_list(llist1, ' ', fptr)
+        for _ in range(llist2_count):
+            llist2_item = int(input())
+            llist2.insert_node(llist2_item)
+
+        llist3 = mergeLists(llist1.head, llist2.head)
+
+        print_singly_linked_list(llist3, ' ', fptr)
         fptr.write('\n')
 
     fptr.close()
