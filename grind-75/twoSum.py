@@ -15,5 +15,6 @@ class Solution:
            
             if remaining in seen: #3
                 return [i, seen[remaining]]  #4
+                
             else:
                 seen[value] = i  #5
