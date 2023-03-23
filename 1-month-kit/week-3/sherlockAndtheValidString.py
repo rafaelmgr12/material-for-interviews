@@ -15,26 +15,37 @@ import sys
 
 def isValid(s):
     # Write your code here
-    frequency = {}
-    for i in s:
-        if i in frequency:
-            frequency[i] += 1
+    # Go over string and count how many times string occured
+    char_dict = {}
+    for char in s:
+        if char in char_dict:
+            char_dict[char] += 1
         else:
-            frequency[i] = 1
-    # case 1: same frequency
-    if len(set(frequency.values())) == 1:
-        return "YES"
-    # case 2: more than 2 unique frenquencies
-    elif len(set(frequency.values())) > 2:
-        return "NO"
-    # case 3: 2 unique frequencies
-    else:
-        for key in frequency:
-            frequency[key] -= 1
-            if len(set(frequency.values())) == 1:
-                return "YES"
-            frequency[key] += 1
-        return "NO"
+            char_dict[char] = 1
+    #initiate largest and smallest count with last char
+    min_count = char_dict[char]
+    max_count = char_dict[char]
+    # count how many times a count occured
+    count_dict = {}
+    for char, value in char_dict.items():
+        if value in count_dict:
+            count_dict[value] += 1
+        else:
+            count_dict[value] = 1
+        #also update max and min count
+        if value < min_count:
+            min_count = value
+        if value > max_count:
+            max_count = value
+    # final test:
+    if len(count_dict) == 1:
+        return 'YES'
+    elif len(count_dict) == 2:
+        if count_dict[max_count] == 1 and max_count - min_count == 1:
+            return 'YES'
+        elif count_dict[min_count] == 1 and min_count == 1:
+            return 'YES'
+    return 'NO'
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
