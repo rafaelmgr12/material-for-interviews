@@ -27,23 +27,17 @@ class Solution:
         Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
         Output: [8,9,9,9,0,0,0,1]
         """
-        dummy_head = ListNode(0)
-        current = dummy_head
+        dummyHead = ListNode(0)
+        curr = dummyHead
         carry = 0
-        
-        while l1 or l2 or carry:
-            val1 = (l1.val if l1 else 0)
-            val2 = (l2.val if l2 else 0)
-            
-            sum = val1 + val2 + carry
-            carry = sum // 10
-            
-            current.next = ListNode(sum % 10)
-            current = current.next
-            
-            if l1:
-                l1 = l1.next
-            if l2:
-                l2 = l2.next
-        
-        return dummy_head.next
+        while l1 != None or l2 != None or carry != 0:
+            l1Val = l1.val if l1 else 0
+            l2Val = l2.val if l2 else 0
+            columnSum = l1Val + l2Val + carry
+            carry = columnSum // 10
+            newNode = ListNode(columnSum % 10)
+            curr.next = newNode
+            curr = newNode
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return dummyHead.next
