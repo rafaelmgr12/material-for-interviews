@@ -25,6 +25,8 @@ The number of nodes in the tree is in the range [0, 100].
 -100 <= Node.val <= 100
 """
 
+import collections
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -38,4 +40,21 @@ class Solution:
         root.left, root.right = root.right, root.left
         self.invertTree(root.left)
         self.invertTree(root.right)
+        return root
+    
+    def invertTree_iteraetively(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return None
+        
+        queue = collections.deque([root])
+        while queue:
+            current = queue.popleft()
+            current.left, current.right = current.right, current.left
+            
+            if current.left:
+                queue.append(current.left)
+            
+            if current.right:
+                queue.append(current.right)
+        
         return root
