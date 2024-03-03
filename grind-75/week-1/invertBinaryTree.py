@@ -26,6 +26,7 @@ The number of nodes in the tree is in the range [0, 100].
 """
 
 import collections
+from typing import Optional
 
 # Definition for a binary tree node.
 # class TreeNode:
