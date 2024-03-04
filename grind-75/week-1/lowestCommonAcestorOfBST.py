@@ -54,9 +54,7 @@ class Solution:
         node = root
         
         while node:
-            
             parent_val = node.val
-            
             if p.val > parent_val and q.val > parent_val:
                 node = node.right
             
