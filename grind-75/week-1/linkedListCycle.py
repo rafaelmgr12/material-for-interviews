@@ -31,3 +31,19 @@ class Solution:
 
         return False
         
+
+    def hasCycle2(self, head: Optional[ListNode]) -> bool:
+        # Floyd algs
+        if head is None:
+            return False
+        
+        slow = head
+        fast = head.next
+        
+        while slow != fast:
+            if fast is None or fast.next is None:
+                return False
+            slow = slow.next
+            fast = fast.next.next
+            
+        return True
