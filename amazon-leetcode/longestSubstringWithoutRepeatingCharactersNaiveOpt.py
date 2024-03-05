@@ -1,35 +1,23 @@
-# Problem: Longest Substring Without Repeating Characters
-# Given a string s, find the length of the longest substring without repeating characters.
-# Examples:
-# 1. Input: s = "abcabcbb"
-#    Output: 3
-#    Explanation: The answer is "abc", with the length of 3.
-# 2. Input: s = "bbbbb"
-#    Output: 1
-#    Explanation: The answer is "b", with the length of 1.
-# 3. Input: s = "pwwkew"
-#    Output: 3
-#    Explanation: The answer is "wke", with the length of 3. Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
-
-class Solution:
-    def lengthOfLongestSubstring(self, s: str) -> int:
-        charIndexMap = {}  
-        maxLength = 0  
-        left = 0  
+def min_sub_array_len_verbose(target, nums):
+    n = len(nums)
+    min_length = float('inf')
+    left = 0
+    sum = 0
+    
+    for right in range(n):
+        sum += nums[right]
+        print(f"Adicionando {nums[right]}, nova soma = {sum}")
         
-        for right, char in enumerate(s):
-           
-            if char in charIndexMap and charIndexMap[char] >= left:
-                left = charIndexMap[char] + 1
+        while sum >= target:
+            min_length = min(min_length, right - left + 1)
+            print(f"Soma >= target, tentando contrair a janela: subarray = {nums[left:right+1]}, comprimento = {right - left + 1}")
+            sum -= nums[left]
+            left += 1
+            print(f"Janela contraída, nova soma = {sum}, nova janela começa em {left}")
             
-            charIndexMap[char] = right  
-            maxLength = max(maxLength, right - left + 1)  
-        
-        return maxLength
+    return min_length if min_length != float('inf') else 0
 
-# Example usage
-if __name__ == "__main__":
-    solution = Solution()
-    print(solution.lengthOfLongestSubstring("abcabcbb"))  # Output: 3
-    print(solution.lengthOfLongestSubstring("bbbbb"))     # Output: 1
-    print(solution.lengthOfLongestSubstring("pwwkew"))    # Output: 3
+# Testando a função com o exemplo dado e prints
+target = 7
+nums = [2,3,1,2,4,3]
+min_sub_array_len_verbose(target, nums)
