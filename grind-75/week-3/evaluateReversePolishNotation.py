@@ -67,3 +67,7 @@ class Solution:
                 stack.append(int(chars))
                 
         return stack[0]
+    
+    
+## Time Complexity: O(n)
+## Space Complexity: O(n)
