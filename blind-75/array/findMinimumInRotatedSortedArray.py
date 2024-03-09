@@ -49,7 +49,7 @@ class Solution:
         l, r = 0, len(nums) - 1 
         
         while l<=r :
-            if nums[l] <= nums[r]:
+            if nums[l] <= nums[r]: ## Check if the array is not rotated
                 min_value = min(min_value, nums[l])
                 break
             
