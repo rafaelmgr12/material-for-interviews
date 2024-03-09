@@ -35,15 +35,12 @@ class Solution:
         max_so_far = min_so_far = result = nums[0]
         
         for i in range(1, len(nums)):
-        # Se o número atual for negativo, troca o máximo e mínimo (pois o negativo faz o pequeno número grande e vice-versa).
             if nums[i] < 0:
                 max_so_far, min_so_far = min_so_far, max_so_far
 
-        # Max/min produto até o elemento atual.
             max_so_far = max(nums[i], max_so_far * nums[i])
             min_so_far = min(nums[i], min_so_far * nums[i])
 
-        # Atualiza o resultado se necessário.
             result = max(result, max_so_far)
 
         return result
