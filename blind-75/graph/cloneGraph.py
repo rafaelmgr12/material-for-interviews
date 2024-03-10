@@ -54,25 +54,29 @@ The Graph is connected and all nodes can be visited starting from the given node
 """
 
 
-"""
 # Definition for a Node.
 class Node:
     def __init__(self, val = 0, neighbors = None):
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
-"""
-
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         oldToNew = {}
-
-        def dfs(node):
+        
+        def cloneNode(node):
+            """
+                Clone the node and its neighbors using DFS
+            """
+            
             if node in oldToNew:
                 return oldToNew[node]
-            newNode = Node(node.val)
-            oldToNew[node] = newNode
+            
+            copy = Node(node.val)
+            oldToNew[node] = copy
+            
             for neighbor in node.neighbors:
-                newNode.neighbors.append(dfs(neighbor))
-            return newNode
-
-        return dfs(node) if node else None
+                copy.neighbors.append(dfs(neighbor))
+            
+            return copy
+        
+        return cloneNode(node) if node else None
