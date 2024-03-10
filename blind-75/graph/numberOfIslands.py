@@ -34,8 +34,6 @@ grid[i][j] is '0' or '1'.
 
 """
 # DFS search
-from regex import R
-
 
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
