@@ -58,7 +58,6 @@ class Solution:
             answer += max(0, min(min_position, max_position) - left_bound)
             
         return answer
-        return count_subarrays
         
     
     def countSubarraysNaive(self, nums: List[int], minK: int, maxK: int) -> int:
