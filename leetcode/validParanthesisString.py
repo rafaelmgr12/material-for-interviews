@@ -35,6 +35,32 @@ s[i] is '(', ')' or '*'.
 """
 
 class Solution:
+    def checkValidStringTwoPointers(self, s: str) -> bool:
+        count_open = 0
+        count_close = 0
+        rigth = len(s) - 1
+
+        for left, ch in enumerate(s):
+            if ch == "(" or ch == "*":
+                count_open += 1
+            
+            else: 
+                count_open -= 1
+            
+            if s[rigth] == ")" or s[rigth] == "*":
+                count_close += 1 
+            
+            else:
+                count_close -= 1
+                
+            right -= 1
+            
+            if count_close < 0 or count_open < 0:
+                return False
+            
+        return True
+
+    
     def checkValidString(self, s: str) -> bool:
         open_brackets = []
         asteriks = []
